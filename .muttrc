@@ -1,0 +1,95 @@
+# Paths -----------------------------------------------------------------------------------------------------
+set certificate_file 	=~/.mutt/certificates		# Where to store certs
+set header_cache 	= ~/.mutt/cache/headers		# Where to store headers
+set message_cachedir 	= ~/.mutt/cache/bodies		# Where to store bodies
+set folder 		="imaps://imap.gmail.com"	# Mailbox location
+set spoolfile   	= +INBOX
+set postponed 		= +[Gmail]/Drafts		# Specify where to save and/or look for postponed messages.
+set tmpdir		= ~/.mutt/temp			# Where to keep temp files
+set signature		= ~/.mutt/sig			# Email signature 
+
+# Basic Options ---------------------------------------------------------------------------------------------
+set imap_user   	= "n.southorn@gmail.com"
+set imap_pass   	= "nitundromoth"
+set smtp_url 		= "smtp://n.southorn@smtp.gmail.com:587"
+set smtp_pass 		= "nitundromoth"
+set from 		= "n.southorn@gmail.com"
+set realname 		= "Nick Southorn"
+set editor 		= "vim"
+set move 		= no				# Gmail behaviour
+unset imap_passive      				# Allow Mutt to open new imap connection automatically.
+set imap_keepalive 	= 300				# Keep IMAP connection alive by polling intermittently.
+set mail_check 		= 120				# How often to check for new mail (time in seconds).
+set wait_key 		= no				# Keep Mutt quiet
+set timeout		= 3				# Idle time before scanning
+set delete						# Don't ask, just delete
+set quit						# Don't ask, just quit
+set beep_new						# Beep on new emails
+
+# Index View Options -----------------------------------------------------------------------------------------
+set date_format 	= "%m/%d"
+set index_format 	= "[%Z] %D %-20.20F %s"
+set sort 		= threads
+set sort_aux 		= reverse-last-date-received
+set uncollapse_jump
+set sort_re
+set reply_regexp 	= "^(([Rr][Ee]?{\[[0-9]+\)?: *)?(\[[^]]+\] *)?)*"
+
+# Index key bindings ----------------------------------------------------------------------------------------
+bind index gg		first-entry
+bind index G		last-entry
+bind index R		group-reply
+bind index <tab>	sync-mailbox
+bind index <space>	collapse-thread
+# Ctrl+R to mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# Sync email
+macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+# Pager view options ----------------------------------------------------------------------------------------
+set pager_index_lines	=20				# number of index lines to show
+set pager_context	=3				# number of context lines to show
+set pager_stop						# don't go to next message automatically
+set menu_scroll						# scroll in menus
+set tilde						# show tildes like in vim
+unset markers						# no ugly plus signs
+
+set quote_regexp 	= "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+
+# Pager key bindings ----------------------------------------------------------------------------------------
+bind pager k		previous-line
+bind pager j		next-line
+bind pager gg		top
+bind pager G		bottom
+
+# View attachments properly
+bind attach <return>	view-mailcap
+
+bind compose p		postpone-message
+
+
+
+
+# Colours ---------------------------------------------------------------------------------------------------
+color header cyan black .
+color header yellow black ^From
+color header yellow black ^Subject
+color body yellow black [_a-z\.\$A-Z0-9\?\=\&\@\%\#\:\,\./~\-]+
+color body yellow black [http|ftp]://[_a-z\.\$A-Z0-9\?\=\&\@\%\#\:\,\./~\-]+
+color quoted green black
+color signature cyan black
+color attachment yellow black
+color tree white black
+color indicator black cyan
+color status yellow blue
+color tilde blue black
+#color normal white black
+#color index green black ~N
+
+
+
+
+
