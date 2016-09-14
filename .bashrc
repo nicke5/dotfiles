@@ -11,10 +11,6 @@ if [ -f /etc/bash_completion ]; then
             . /etc/bash_completion
 fi
 
-if [ -f ~/env/ens82 ]; then
-        . ~/env/ens82
-fi
-
 #==============================================================================
 # LOCAL BIN PATH
 export PATH=~/bin:$PATH
@@ -64,7 +60,5 @@ NC='\e[0m'
 export PS1="$BLUE[$RED\u$BLUE@\h]: \w\n[\t]\n==>  \[$NC\]"
 export PS4='$LINENO+ '
 
+#==============================================================================
 
-# added by Anaconda 2.1.0 installer
-#export PATH="/panfs/hpc/home/nsouthor/anaconda/bin:$PATH"
-[nsouthor@sbrx-hpc-ln1]: ~
