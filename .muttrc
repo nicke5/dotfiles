@@ -9,12 +9,12 @@ set tmpdir		= ~/.mutt/temp			# Where to keep temp files
 set signature		= ~/.mutt/sig			# Email signature 
 
 # Basic Options ---------------------------------------------------------------------------------------------
-set imap_user   	= "n.southorn@gmail.com"
+set imap_user   	= "name@gmailpassword.com"
 set imap_pass   	= "nitundromoth"
-set smtp_url 		= "smtp://n.southorn@smtp.gmail.com:587"
-set smtp_pass 		= "nitundromoth"
-set from 		= "n.southorn@gmail.com"
-set realname 		= "Nick Southorn"
+set smtp_url 		= "smtp://name@smtp.gmail.com:587"
+set smtp_pass 		= "password"
+set from 		= "name@gmail.com"
+set realname 		= "realname"
 set editor 		= "vim"
 set move 		= no				# Gmail behaviour
 unset imap_passive      				# Allow Mutt to open new imap connection automatically.
