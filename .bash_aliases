@@ -3,8 +3,6 @@
 # Sources from .bashrc
 #------------------------------------------------------------------------------
 # GENERAL ALIASES
-alias sd='~/solarized/gnome-terminal-colors-solarized/set_dark.sh'
-alias sl='~/solarized/gnome-terminal-colors-solarized/set_light.sh'
 alias ls='ls --color=auto'
 alias ll='ls -la'
 alias lsd='ls -la | grep ^d'
@@ -44,7 +42,6 @@ alias psg='ps -Helf | greo -v $$ | grep -i -e WCHAN -e'
 alias tf="find . -print | sed -e 's;[^/]*/;|_____;g;s;_____|; |;g'"
 alias connections='sudo lsof -n -P -i +c 15'
 alias src='. ~/.bashrc'
-alias myp='cd /home/nsouthor/Dropbox/code/python'
 
 alias which='type -a'
 alias h='history'
@@ -52,12 +49,6 @@ alias ..='cd ..'
 alias npath='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 alias du='du -kh'
-
-alias proxyon='export HTTP_PROXY=http://nsouthor@10AveryDrive@proxy.mbhpe.net:8080;HTTPS_PROXY=https://nsouthor@10AveryDrive@proxy.mbhpe.net:8080'
-alias proxyoff='export HTTP_PROXY="";export HTTPS_PROXY=""'
-
-alias bmd='cd ~/Documents/HPC2015/Benchmarks/Distribution'
-
 
 #------------------------------------------------------------------------------
 # GIT ALIASES
@@ -71,4 +62,4 @@ alias gl='git pull origin master'
 
 #------------------------------------------------------------------------------
 # PBS ALIASES
-alias showNodes="pbsnodes -a  | grep vnode | awk '{print \$3}'"
+#alias showNodes="pbsnodes -a  | grep vnode | awk '{print \$3}'"
