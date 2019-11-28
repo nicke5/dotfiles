@@ -1,7 +1,7 @@
-#------------------------------------------------------------------------------
+#------------------------------------------------------------------------
 # Bash Aliases
 # Sources from .bashrc
-#------------------------------------------------------------------------------
+#------------------------------------------------------------------------
 # GENERAL ALIASES
 alias ls='ls --color=auto'
 alias ll='ls -la'
@@ -13,6 +13,7 @@ alias lk='ls -lSr'                                      # sort by size, biggest 
 alias lc='ls -ltcr'                                     # sort by and show change time, most recent last
 alias lu='ls -ltur'                                     # sort by and show access time, most recent last
 alias lt='ls -lrta'                                     # sort by creation date, most recent first
+alias vim='/usr/bin/nvim'
 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -50,7 +51,7 @@ alias npath='echo -e ${PATH//:/\\n}'
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 alias du='du -kh'
 
-#------------------------------------------------------------------------------
+#------------------------------------------------------------------------
 # GIT ALIASES
 alias g='git'
 alias gr='git rm -rf'
@@ -60,6 +61,15 @@ alias gc='git commit -m'
 alias gp='git push origin master'
 alias gl='git pull origin master'
 
-#------------------------------------------------------------------------------
-# PBS ALIASES
-#alias showNodes="pbsnodes -a  | grep vnode | awk '{print \$3}'"
+# For each dir listed on the left of :, create an alias you see on the 
+# right of :
+for DIR in "Music":mus "Pictures":pics "Documents":docs;
+{
+	[ -d "$HOME/${DIR%:*}" ] && alias ${DIR/*:}="cd $HOME/${DIR%:*}"
+}
+
+# A cleaner lsblk
+if type -fP lsblk > /dev/null 2>&1; then
+	alias lsblkid='lsblk -o name,label,fstype,size,uuid,mountpoint --noheadings'
+fi
+
