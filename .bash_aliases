@@ -63,7 +63,7 @@ alias gl='git pull origin master'
 
 # For each dir listed on the left of :, create an alias you see on the 
 # right of :
-for DIR in "Music":mus "Pictures":pics "Documents":docs;
+for DIR in "Music":mus "Pictures":pics "Documents":docs "dotfiles":dots;
 {
 	[ -d "$HOME/${DIR%:*}" ] && alias ${DIR/*:}="cd $HOME/${DIR%:*}"
 }
