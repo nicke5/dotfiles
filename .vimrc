@@ -1,47 +1,27 @@
-"==============================================================================
-" .vimrc
-" Nick Southorn
-"
-"
-"
-"==============================================================================
-
-"==============================================================================
-" LOOK AND FEEL
-" Turn on line numbers
+"=============================================================================#
+"  _   _ _____ ____                                                           #
+" | \ | | ____/ ___|    Nick Southorn                                         #
+" |  \| |  _| \___ \    https://github.com/nicksouthorn                       #
+" | |\  | |___ ___) |   n.southorn@gmail.com                                  # 
+" |_| \_|_____|____/                                                          #
+"                                                                             #
+"=============================================================================#
+" Description     :Vim configuration files
+" Author	  :Nick Southorn
+" Date            :30/12/19
+" Version         :1.0    
+" Usage		  :
+" Notes           :                                         
+" bash_version    :                      
+"=============================================================================#
+" => Global Settings
+"=============================================================================#
 set number
-" Toggle line number and fold column for easy copying
-nnoremap <F4> :set nonumber!<CR>: set foldcolumn=0<CR>
-
-" Solarized Colors
+set nocompatible	
+set showcmd
 syntax enable
-set background=dark
-colorscheme solarized
-
-
-" Highlight excess line length
-augroup vim_autocmds
-	autocmd!
-	" Highlight chars past column 120
-	autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-	autocmd FileType python match Excess /\%120v.*/
-	autocmd FileType python set nowrap
-augroup END
-
-"" Powerline setup
-let g:PowerLine_symbols = 'fancy'
-set encoding=utf-8
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-set laststatus=2
-
-
-" Prevent automatic comment insertion
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Enable code folding
-" Use za to open and close a fold
-set foldmethod=indent
-set foldlevel=00
+filetype on 
+filetype plugin indent on 
 
 
 " Window splitting
@@ -51,16 +31,8 @@ set foldlevel=00
 " Switch windows: Ctrl+w + w
 
 
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-
-
-" Syntax highlighting and validation
-syntax on                     " Syntax highlighting
-filetype on                   " Try to detect filetypes
-filetype plugin indent on     " Enable loading indent file for filetype
+" Prevent automatic comment insertion
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " sudo write! For when you've opened a file as read-only by mistake.
 
@@ -68,124 +40,122 @@ cnoremap sudow w !sudo tee % >/dev/null
 
 
 
-"==============================================================================
-" MODULE MANAGEMENT
 
-" Pathogen
-" call pathogen#helptags()
-" execute pathogen#infect()
-
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+"=============================================================================#
+" => PLUGINS
+"=============================================================================#
+" Set the runtime path to include runtime and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Let vundle manage vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'vim-airline/vim-airline'		  " Airline 
+Plugin 'vim-airline/vim-airline-themes'		  " Airline Themes 
+Plugin 'scrooloose/nerdtree'			  " NERDTree file manager
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'  " NERDTree highlighting
+Plugin 'ryanoasis/vim-devicons' 		  " Add icons to NERDTree
+Plugin 'vim-python/python-syntax'		  " Python syntax highlighting 
+Plugin 'vimwiki/vimwiki'                          " Vim wiki 
+Plugin 'ap/vim-css-color'                         " Color previews for CSS 
+Plugin 'tpope/vim-surround'                       " Change surrounding marks 
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'nvie/vim-flake8'
 
-" The bundles you install will be listed here
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'klen/python-mode'
-"
+" All plugins must be added before the following line
+call vundle#end()
+
 filetype plugin indent on
+" To ignore plugin indent changes, instead use: 
 
-"==============================================================================
-" MODULE SPECIFIC SETTINGS
-
-" Task lists
-map <leader>td <Plug>TaskList
-
-" Gundo
-" map <leader>g :GundoToggle<CR>
-nnoremap <F3> :GundoToggle<CR>
-
-" PyFlakes
-" Will notify you about unused imports and invalid syntax
-let g:pyFlakes_use_quickfix = 0
-
-" SnipMate
-filetype plugin on
-
-"s Tab completion
-"au FileType python set omnifunc=pythoncomplete#Complete
-"let g:SuperTabDefaultCompletionType = "context"
-
-"set completeopt=menuone,longest,preview
-
-" NERDTree file browser
-" Use F2 
-map <F2> :NERDTreeToggle<CR>
+" Brief help 
+" :PluginList       - lists configured plugins 
+noremap <F3> :PluginList<CR>
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate 
+noremap <F4> :PluginInstall!<CR>: q<CR>
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache 
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal 
+" see :h vundle for more details or wiki for FAQ 
+" Put your non-Plugin stuff after this line
 
 
-" Searching
-nmap <leader>a <Esc>:Ack!
+"=============================================================================#
+" => PLUGIN: Airline  
+"=============================================================================#
+" Display all buffers when only one tab open
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=1
 
 
 
 
+"=============================================================================#
+" => PLUGIN: NERDTree  
+"=============================================================================#
+set encoding=utf8
+set guifont=DroidSansMono\ Nerd\ Font\ 11
+" Uncomment to autostart the NERDTree
+" autocmd vimenter * NERDTree
+" Open NERDTree automatically if vim is opened with no files specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>			" Map CTRL+n to open NERDTree
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeShowLineNumbers=0
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
 
 
+" Workaround to get rid of ^G in NERDTree explorer
+let g:NERDTreeNodeDelimiter = "\u00a0"
+
+"=============================================================================#
+" => PLUGIN: Python-syntax
+"=============================================================================#
+let g:python_highlight_all=1
 
 
-"==============================================================================
-" GIT SPECIFIC SETTINGS
-" Integration with git
+"=============================================================================#
+" => PLUGIN: VimWiki
+"=============================================================================#
+"Key bindings
+" <Leader> = \
+"Normal mode:
+"
+"    <Leader>ww -- Open default wiki index file.
+"    <Leader>wt -- Open default wiki index file in a new tab.
+"    <Leader>ws -- Select and open wiki index file.
+"    <Leader>wd -- Delete wiki file you are in.
+"    <Leader>wr -- Rename wiki file you are in.
+"    <Enter> -- Follow/Create wiki link
+"    <Shift-Enter> -- Split and follow/create wiki link
+"    <Ctrl-Enter> -- Vertical split and follow/create wiki link
+"    <Backspace> -- Go back to parent(previous) wiki link
+"    <Tab> -- Find next wiki link
+"    <Shift-Tab> -- Find previous wiki link
+"
+"For more keys, see :h vimwiki-mappings
+"Commands
+"
+"    :Vimwiki2HTML -- Convert current wiki link to HTML
+"    :VimwikiAll2HTML -- Convert all your wiki links to HTML
+"    :help vimwiki-commands -- list all commands
+"    :help vimwiki -- General vimwiki help docs
+"
 
-" Gblame: This allows you to view a line by line comparison of who the last person to touch that line of code is.
-" Gwrite: This will stage your file for commit, basically doing git add <filename>
-" Gread: This will basically run a git checkout <filename>
-" Gcommit: This will just run git commit. Since its in a vim buffer, you can use keyword completion (Ctrl-N), like test_all<Ctrl-N> to find the method name in your buffer and complete it for the commit message. You can also use + and - on the filenames in the message to stage/unstage them for the commit.
+"=============================================================================#
+" => PLUGIN: CSS-Color
+"=============================================================================#
+" A very fast, multi-syntax context-sensitive color name highlighter
+" No config required
 
+"=============================================================================#
+" => PLUGIN: VIM-surround
+"=============================================================================#
+" Press cs"' inside
+" "Hello world!"
+" to change it to
+" 'Hello world!'
+" No config required
 
-"==============================================================================
-" PYTHON SPECIFIC SETTINGS
-" PEP8
-" Ensures consistency of code
-let g:pep8_map='<leader>8'
-
-" Rope
-let g:pymode_rope = 1
-" Python-mode
-" Activate rope
-" Keys:
-" K             Show python docs
-" <Ctrl-Space>  Rope autocomplete
-" <Ctrl-c>g     Rope goto definition
-" <Ctrl-c>d     Rope show documentation
-" <Ctrl-c>f     Rope find occurrences
-" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
-" [[            Jump on previous class or function (normal, visual, operator modes)
-" ]]            Jump on next class or function (normal, visual, operator modes)
-" [M            Jump on previous class or method (normal, visual, operator modes)
-" ]M            Jump on next class or method (normal, visual, operator modes)
-
-" Documentation
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
-
-"Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
-" Auto check on save
-let g:pymode_lint_write = 1
-
-" Support virtualenv
-let g:pymode_virtualenv = 1
-
-" Enable breakpoints plugin
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_key = '<leader>b'
-
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-
-" Don't autofold code
-let g:pymode_folding = 0
-
-" Execute file being edited with <shift> + e:
-map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
