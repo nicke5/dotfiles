@@ -13,7 +13,8 @@ alias lk='ls -lSr'                                      # sort by size, biggest 
 alias lc='ls -ltcr'                                     # sort by and show change time, most recent last
 alias lu='ls -ltur'                                     # sort by and show access time, most recent last
 alias lt='ls -lrta'                                     # sort by creation date, most recent first
-alias vim='/usr/bin/nvim'
+#alias vim='/usr/bin/nvim'
+alias vi=/usr/bin/vim
 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'

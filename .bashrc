@@ -1,4 +1,24 @@
-# .bashrc
+#=============================================================================# 
+#  _   _ _____ ____                                                           # 
+# | \ | | ____/ ___|    Nick Southorn                                         # 
+# |  \| |  _| \___ \    https://gitlab.com/nicksouthorn                       # 
+# | |\  | |___ ___) |   n.southorn@gmail.com                                  # 
+# |_| \_|_____|____/                                                          # 
+#                                                                             # 
+#=============================================================================# 
+# Name            : .bashrc
+# Description     : bash profile initialisation file
+# Author          : Nick Southorn 
+# Date            : 30/07/19 
+# Usage           : 
+# Notes           : 
+#=============================================================================# 
+# TODO            : 
+#=============================================================================# 
+VERSION=1.2 
+#=============================================================================# 
+
+
 #==============================================================================
 # GLOBAL DEFINITIONS
 if [ -f /etc/bashrc ]; then
@@ -10,6 +30,11 @@ fi
 if [ -f /etc/bash_completion ]; then
             . /etc/bash_completion
 fi
+
+#==============================================================================
+# CUSTOM DIR COLORS
+[ -e ~/.dircolors ] && eval $(dircolors -b ~/.dircolors) ||
+    eval $(dircolors -b)
 
 #==============================================================================
 # LOCAL BIN PATH
@@ -56,9 +81,12 @@ cyan='\e[0;36m'
 CYAN='\e[1;36m'
 YELLOW='\e[33;33m'
 NC='\e[0m'
-
+#
 export PS1="$BLUE[$RED\u$BLUE@\h]: \w\n[\t]\n==>  \[$NC\]"
 export PS4='$LINENO+ '
-
+#
 #==============================================================================
-
+# Added to ensure my ssh key is being used to connect to GitLab.
+#eval "$(ssh-agent -s)"
+#ssh-add ~/.ssh/ns.ppk
+source ~/bin/bash_functions

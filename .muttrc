@@ -1,3 +1,4 @@
+# NO LONGER USED
 # Paths -----------------------------------------------------------------------------------------------------
 set certificate_file 	=~/.mutt/certificates		# Where to store certs
 set header_cache 	= ~/.mutt/cache/headers		# Where to store headers
@@ -10,7 +11,7 @@ set signature		= ~/.mutt/sig			# Email signature
 
 # Basic Options ---------------------------------------------------------------------------------------------
 set imap_user   	= "name@gmailpassword.com"
-set imap_pass   	= "nitundromoth"
+set imap_pass   	= "password"
 set smtp_url 		= "smtp://name@smtp.gmail.com:587"
 set smtp_pass 		= "password"
 set from 		= "name@gmail.com"
@@ -88,6 +89,7 @@ color status yellow blue
 color tilde blue black
 #color normal white black
 #color index green black ~N
+ 
 
 
 
